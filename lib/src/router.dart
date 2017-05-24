@@ -54,8 +54,8 @@ class Router {
   }
 
   ///
-  Route<Null> _notFoundRoute(BuildContext context, String path) {
-    RouteCreator creator = (RouteSettings routeSettings, Map<String, String> params) {
+  Route<Null> _notFoundRoute<T1,T2>(BuildContext context, String path) {
+    RouteCreator<T1,T2> creator = (RouteSettings routeSettings, Map<T1, T2> params) {
       return new MaterialPageRoute<Null>(settings: routeSettings, builder: (BuildContext context) {
         return notFoundHandler(params);
       });
@@ -64,7 +64,7 @@ class Router {
   }
 
   ///
-  Route<Null> matchRoute(String path, {RouteSettings routeSettings = null,
+  Route<Null> matchRoute<T1,T2>(String path, {RouteSettings routeSettings = null,
     TransitionType transitionType, Duration transitionDuration = const Duration(milliseconds: 250),
     RouteTransitionsBuilder transitionsBuilder})
   {
@@ -78,8 +78,8 @@ class Router {
       return null;
     }
     RouteHandler handler = (route != null ? route.handler : notFoundHandler);
-    Map<String, String> parameters = match?.parameters ?? <String, String>{};
-    RouteCreator creator = (RouteSettings routeSettings, Map<String, String> params) {
+    Map<T1, T2> parameters = match?.parameters ?? <T1, T2>{};
+    RouteCreator<T1,T2> creator = (RouteSettings routeSettings, Map<T1, T2> params){
       bool isNativeTransition = (transitionType == TransitionType.native || transitionType == TransitionType.nativeModal);
       if (isNativeTransition) {
         return new MaterialPageRoute<Null>(settings: routeSettings, fullscreenDialog: transitionType == TransitionType.nativeModal,

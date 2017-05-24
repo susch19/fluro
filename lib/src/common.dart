@@ -8,10 +8,9 @@
 part of fluro;
 
 ///
-typedef Route<Null> RouteCreator(RouteSettings route, Map<String, String> parameters);
-
+typedef Route<Null> RouteCreator<T1,T2>(RouteSettings route, Map<T1, T2> parameters);
 ///
-typedef Widget RouteHandler(Map<String, String> parameters);
+typedef Widget RouteHandler<T1,T2>(Map<T1, T2> parameters);
 
 ///
 class AppRoute {
